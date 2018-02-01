@@ -1,0 +1,9 @@
+def extract_Data(infile, outfile):
+    with open(infile) as f:
+        lines = f.readlines()
+    lines = [json.loads(l) for l in lines]
+    names = [l['name'] for l in lines]
+    ages = [l['prop']['age'] for l in lines]
+    with open(outfile, 'w') as f:
+        for n,a in zip(names, ages):
+            f.write(n + '\t' + str(a) + '\n')
