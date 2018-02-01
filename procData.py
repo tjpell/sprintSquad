@@ -15,7 +15,7 @@ def extract_Data(infile, outfile):
             f.write(n + '\t' + str(a) + '\n')
 
 prefix = 'prefix'
-path = '/srv/runme/'
+path = '../../srv/runme/'
 files = glob.glob(path + '*prefix*')
 
 # files = [filename for filename in os.listdir('.') if filename.startswith("prefix")]
