@@ -2,6 +2,8 @@ import glob
 import json
 import os
 
+print "this might work"
+
 def extract_Data(infile, outfile):
     with open(infile) as f:
         lines = f.readlines()
@@ -19,6 +21,9 @@ os.system('cd ../..')
 prefix = 'prefix'
 path = '/srv/runme/'
 files = glob.glob(path + '*prefix*')
+
+print os.getcwd()
+print files
 
 # files = [filename for filename in os.listdir('.') if filename.startswith("prefix")]
 print "files:" , files
