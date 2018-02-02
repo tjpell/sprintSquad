@@ -15,10 +15,11 @@ def extract_Data(infile, outfile):
             f.write(n + '\t' + str(a) + '\n')
 
 os.system('cd ../..')
+os.system('pwd')
 
 prefix = 'prefix'
 path = '/srv/runme/'
-files = glob.glob(path + '*prefix*')
+files = glob.glob(path + 'prefix*')
 
 # files = [filename for filename in os.listdir('.') if filename.startswith("prefix")]
 print "files:" , files
