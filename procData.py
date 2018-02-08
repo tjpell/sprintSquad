@@ -31,4 +31,5 @@ for f in files:
     try:
         extract_Data(f, path + '{}.txt'.format(prefix))
     except ValueError: #catches non-json files
+        print "we fucked up"
         pass
