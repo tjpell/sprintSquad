@@ -1,2 +1,2 @@
 # sprintSquad
-A home for all code for the sprint project
+A home for all code for the sprint project!
