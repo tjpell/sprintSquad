@@ -19,6 +19,9 @@ os.system('pwd')
 
 prefix = 'prefix'
 path = '/srv/runme/'
+
+os.system('rm ' + path + prefix + '.txt')
+
 files = glob.glob(path + 'prefix*')
 
 # files = [filename for filename in os.listdir('.') if filename.startswith("prefix")]
