@@ -10,7 +10,7 @@ def extract_Data(infile, outfile):
     lines = [l for l in lines if l.get('name') and l.get('prop').get('age')] #keys aren't null
     names = [l['name'] for l in lines]
     ages = [l['prop']['age'] for l in lines]
-    with open(outfile, 'w') as f:
+    with open(outfile, 'wa') as f:
         for n,a in zip(names, ages):
             f.write(n + '\t' + str(a) + '\n')
 
