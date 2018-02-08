@@ -17,10 +17,12 @@ def extract_Data(infile, outfile):
 os.system('cd ../..')
 os.system('pwd')
 
-prefix = 'prefix'
+prefix = sys.argv[1]
 path = '/srv/runme/'
 
-os.system('rm ' + path + prefix + '.txt')
+# os.system('mv ' + path + prefix + '.txt ' + path + prefix + '.json')
+#
+# os.system('rm ' + path + prefix + '.txt')
 
 files = glob.glob(path + prefix + '*')
 
