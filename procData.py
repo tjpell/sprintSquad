@@ -24,8 +24,8 @@ os.system('rm ' + path + prefix + '.txt')
 
 # files = glob.glob(path + 'prefix*')
 
-files = [filename for filename in os.listdir('.') if filename.startswith("prefix*")]
-# print "files:" , files
+files = [filename for filename in os.listdir('.') if filename.startswith("prefix")]
+print "files:" , files
 for f in files:
     try:
         extract_Data(f, path + '{}.txt'.format(prefix))
