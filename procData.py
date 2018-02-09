@@ -1,6 +1,7 @@
 import glob
 import json
 import os
+import sys
 
 def extract_Data(infile, outfile):
     with open(infile) as f:
@@ -42,4 +43,5 @@ for f in files:
         print "oops."
         pass
 
+# move the prefix.txt out of temp
 os.system('mv tmp/' + path + prefix + '.txt ' + path + prefix + '.txt')
