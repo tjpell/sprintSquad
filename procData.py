@@ -48,6 +48,6 @@ for f in files:
 # move the prefix.txt out of temp
 # os.system('mv ' + path + 'tmp/' + prefix + '.txt ' + path + prefix + '.txt')
 
-os.system('mv ' + 'tmp/' + prefix + '.txt ..')
-
+# os.system('mv ' + 'tmp/' + prefix + '.txt ..')
+ 
 # os.system('rm -rf ' + tmp)
