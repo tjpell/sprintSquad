@@ -40,7 +40,7 @@ files = glob.glob(path + prefix + '*')
 print "files:" , files
 for f in files:
     try:
-        extract_Data(f, path + '{}.txt'.format(prefix))
+        extract_Data(f, tmp + '{}.txt'.format(prefix))
     except ValueError:
         print "oops."
         pass
@@ -49,5 +49,5 @@ for f in files:
 # os.system('mv ' + path + 'tmp/' + prefix + '.txt ' + path + prefix + '.txt')
 
 # os.system('mv ' + 'tmp/' + prefix + '.txt ..')
- 
+
 # os.system('rm -rf ' + tmp)
