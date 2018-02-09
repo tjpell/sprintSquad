@@ -42,4 +42,4 @@ for f in files:
         pass
 
 # move the prefix.txt out of temp
-os.system('mv tmp/' + path + prefix + '.txt ' + path + prefix + '.txt')
+os.system('mv ' + path + 'tmp/' + prefix + '.txt ' + path + prefix + '.txt')
