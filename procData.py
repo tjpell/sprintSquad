@@ -25,13 +25,11 @@ os.system('pwd')
 
 prefix = sys.argv[1]
 
+path = '/srv/runme/'
 
 # os.system('mv ' + path + prefix + '.txt ' + path + prefix + '.json')
 #
 # os.system('rm ' + path + prefix + '.txt')
-
-files = glob.glob(path + prefix + '*')
-
 # files = [filename for filename in os.listdir('.') if filename.startswith(prefix)]
 print "files:" , files
 
