@@ -23,7 +23,7 @@ def extract_Data(infile, output):
         names = [l['name'] for l in lines]
         ages = [l['prop']['age'] for l in lines]
         for n,a in zip(names, ages):
-            output.append(n + '\t' + str(a) + '\n')
+            output.append(n + '\t' + str(a))
         
 os.system('cd ../..')
 os.system('pwd')
