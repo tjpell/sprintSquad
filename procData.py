@@ -4,12 +4,13 @@ import os
 import sys
 
 def extract_Data(infile, outfile):
+    lines = []
     with open(infile) as f:
-        lines = f.readlines()
+        oldlines = f.readlines()
     if lines:
-        for i in range(len(lines)):
+        for i in range(len(oldlines)):
             try:
-                lines[i] = json.loads(lines[i])
+                newlines.append(json.loads(oldlines[i]))
             except ValueError: #catches non-json format
                 del(lines[i])
         lines = [l for l in lines if 'name' in l and 'prop' in l and 'age' in l['prop']] #keys exist
