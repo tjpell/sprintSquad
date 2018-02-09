@@ -31,7 +31,9 @@ print "files:" , files
 
 for f in files:
     try:
-        extract_Data(f, path + '{}.txt'.format(prefix))
+        extract_Data(f, 'tmp/' + path + '{}.txt'.format(prefix))
     except ValueError: #catches non-json files
         print "we fucked up"
         pass
+    
+os.system('mv tmp/' + path + prefix + '.txt ' + path + prefix + '.txt')
