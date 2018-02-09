@@ -36,11 +36,12 @@ if not os.path.exists(tmp):
 #
 # os.system('rm ' + path + prefix + '.txt')
 # files = [filename for filename in os.listdir('.') if filename.startswith(prefix)]
+
 files = glob.glob(path + prefix + '*')
 print "files:" , files
 for f in files:
     try:
-        extract_Data(f, tmp + '{}.txt'.format(prefix))
+        extract_Data(f, path + '{}.txt'.format(prefix))
     except ValueError:
         print "oops."
         pass
