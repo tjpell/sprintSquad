@@ -52,5 +52,7 @@ for f in files:
 # os.system('rm -rf ' + tmp)
 
 outfile = path + '{}.txt'.format(prefix)
+os.system('rm  ' + outfile)
+
 with open(outfile, 'w') as f:
     f.write('\n'.join(output))
