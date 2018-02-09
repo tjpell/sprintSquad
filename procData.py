@@ -28,7 +28,7 @@ prefix = sys.argv[1]
 
 path = '/srv/runme/'
 
-tmp = path + 'tmp'
+tmp = path + 'tmp/'
 if not os.path.exists(tmp):
     os.system('mkdir ' + tmp)
 
@@ -46,5 +46,8 @@ for f in files:
         pass
 
 # move the prefix.txt out of temp
-os.system('mv ' + path + 'tmp/' + prefix + '.txt ' + path + prefix + '.txt')
+# os.system('mv ' + path + 'tmp/' + prefix + '.txt ' + path + prefix + '.txt')
+
+os.system('mv ' + 'tmp/' + prefix + '.txt ..')
+
 # os.system('rm -rf ' + tmp)
