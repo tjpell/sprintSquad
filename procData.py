@@ -30,7 +30,7 @@ path = '/srv/runme/'
 
 tmp = path + 'tmp/'
 if not os.path.exists(tmp):
-    os.system('mkdir ' + tmp)
+    os.mkdir(tmp)
 
 # os.system('mv ' + path + prefix + '.txt ' + path + prefix + '.json')
 #
