@@ -28,30 +28,27 @@ def extract_Data(infile, outlist):
             outlist.append(n + '\t' + str(a))
 
 
-def main():
-    prefix = sys.argv[1]  # get prefix from deploy.py
-    os.system('cd ../..')  # move down so that we can access srv directory
+if __name__ == "__main__":
+    os.system('cd ../..')
     os.system('pwd')
-    path = '/srv/runme/' + prefix + '/'  # path that we are writing to
+    path = '/srv/runme/'
+    prefix = sys.argv[1]
 
     # os.system('mv ' + path + prefix + '.txt ' + path + prefix + '.json')
     # os.system('rm ' + path + prefix + '.txt')
     # files = [filename for filename in os.listdir('.') if filename.startswith(prefix)]
 
-    file = path + 'Raw.txt'
+    files = glob.glob(path + prefix + '*')
+    print "files:" , files
     output = []
+    for f in files:
+        try:
+            extract_Data(f, output)
+        except ValueError:
+            print "BAD FILE oops."
 
-    try:
-        extract_Data(file, output)
-    except ValueError:
-        print " oops."
-
-    outfile = path + 'proc.txt'
+    outfile = path + '{}.txt'.format(prefix)
     os.system('rm  ' + outfile)
 
     with open(outfile, 'w') as f:
         f.write('\n'.join(output)+'\n')
-
-
-if __name__ == "__main__":
-    main()

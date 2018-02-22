@@ -21,29 +21,21 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     print "Pull from Github successful"
     time.sleep(1)
 
-    print "Launching server at " + server_address
-
     print "Lets crontab some shit"
-    # ssh.exec_command('crontab - l > mycron')  # write out current crontab. we should remove this "mycron" part
-    # ssh.exec_command('echo "*/2 * * * * python sprintSquad/procData.py {}" >> mycron'.format(prefix))  # every 5 mins
-    # ssh.exec_command('crontab mycron')  # fire up new cron file
-    # ssh.exec_command('rm mycron')  # remove file after use
+    ssh.exec_command('rm mycron')  # rm old cron
 
-    ssh.exec_command('crontab - r')  # write out current crontab. we should remove this "mycron" part
-    ssh.exec_command('(crontab - l 2>/dev/null; echo "*/2 * * * * python sprintSquad/procData.py {}") | crontab - '.format(prefix))  # every 5 mins
-    # ssh.exec_command('crontab mycron')  # fire up new cron file
-
+    ssh.exec_command('crontab - l > mycron')  # write out current crontab. we should remove this "mycron" part
+    ssh.exec_command('echo "*/5 * * * * python sprintSquad/procData.py {}" >> mycron'.format(prefix))  # every 5 mins
+    ssh.exec_command('crontab mycron')  # fire up new cron file
     print "Script fully executed ... exciting!"
 
     # ssh.exec_command('python sprintSquad/procData.py ' + prefix)
     ssh.close()
 
-def main():
+if __name__ == "__main__":
+
     key_path = '/Users/taylorjames/keys_2_the_city/sprintSquad.pem'
     server_address = 'ec2-34-217-50-169.us-west-2.compute.amazonaws.com'
     prefix = 'prefix'
 
     deploy(key_path, server_address, prefix)
-
-if __name__ == "__main__":
-    main()
