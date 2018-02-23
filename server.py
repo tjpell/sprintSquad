@@ -1,9 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from jinja2 import Environment
-
 import sys
 
 app = Flask(__name__)
+
+# fire up server with the following
+# gunicorn -D --threads 4 -b 0.0.0.0:5000 --access-logfile server.log --timeout 360 server:app prefix
 
 
 #########################################################################################################
@@ -24,11 +26,23 @@ app = Flask(__name__)
 
 #########################################################################################################
 
+@app.route('/')
+def login():
+    return render_template('sprint.html', prefix=prefix)
 
-@app.route("/")
+
+@app.route("/", methods=['POST'])
 def runme():
     """Host the server"""
+    result = request.get_json()
+    with open("Raw.txt", "wb") as fo:
+        fo.write(repr(result))
+    return repr(result)
 
-    tedeps
+    # now we need to rotate this Raw.txt
 
-    return render_template('articles.html', prefix=prefix)
+
+
+
+i = sys.argv.index('server:app')
+prefix = sys.argv[i + 1]

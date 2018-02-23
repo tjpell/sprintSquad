@@ -3,10 +3,28 @@ import json
 import os
 import sys
 
+def process_lines(json_lines, outlist):
+    """
+    when given JSON, this should proccess the json_lines and append the result to the outlist
+
+    :param json_lines: JSON formatted input
+    :param outlist: lines of "name    age" formatted strings
+    :return: None, modifies global variables
+    """
+
+    # we should split out the conditionals to create each line one at a time so that our output is correct
+    key_lines = [l for l in json_lines if 'name' in l and 'prop' in l and 'age' in l['prop']]  # keys exist
+    lines = [l for l in key_lines if l.get('name') and l.get('prop').get('age')]  # keys aren't null
+    names = [l['name'] for l in lines]
+    ages = [l['prop']['age'] for l in lines]
+    for n, a in zip(names, ages):
+        outlist.append(n + '\t' + str(a))
+
+
 def extract_Data(infile, outlist):
     """
-    Infile: file of JSON blobs to be processed
-    Output: list of strings containing names and ages extracted from properly formatted JSON blobs
+    infile: file of JSON blobs to be processed
+    outlist: list of strings containing names and ages extracted from properly formatted JSON blobs
     """
 
     json_lines = []
@@ -19,13 +37,7 @@ def extract_Data(infile, outlist):
             except ValueError:  # catches non-json formatted lines
                 pass  # should print an error here
 
-        # we should split out the conditionals to create each line one at a time so that our output is correct
-        key_lines = [l for l in json_lines if 'name' in l and 'prop' in l and 'age' in l['prop']]  # keys exist
-        lines = [l for l in key_lines if l.get('name') and l.get('prop').get('age')]  # keys aren't null
-        names = [l['name'] for l in lines]
-        ages = [l['prop']['age'] for l in lines]
-        for n, a in zip(names, ages):
-            outlist.append(n + '\t' + str(a))
+        process_lines(json_lines, outlist)
 
 
 def main():
@@ -33,10 +45,6 @@ def main():
     os.system('cd ../..')  # move down so that we can access srv directory
     os.system('pwd')
     path = '/srv/runme/' + prefix + '/'  # path that we are writing to
-
-    # os.system('mv ' + path + prefix + '.txt ' + path + prefix + '.json')
-    # os.system('rm ' + path + prefix + '.txt')
-    # files = [filename for filename in os.listdir('.') if filename.startswith(prefix)]
 
     file = path + 'Raw.txt'
     output = []
