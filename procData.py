@@ -44,7 +44,7 @@ def main():
     try:
         extract_Data(file, output)
     except ValueError:
-        print " oops."
+        print "oops."
 
     outfile = path + 'proc.txt'
     os.system('rm  ' + outfile)
