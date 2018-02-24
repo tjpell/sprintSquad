@@ -9,9 +9,9 @@ from procData2 import write_JSON_if_valid
 app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
-# def readWriteJSON(prefix):
-def readWriteJSON():
-	prefix = 'prefix'
+def readWriteJSON(prefix):
+# def readWriteJSON():
+# 	prefix = 'prefix'
 	log_path = '/srv/runme/{}/Raw.txt'.format(prefix)
 	my_logger = logging.getLogger('MyLogger')
 	my_logger.setLevel(logging.DEBUG)
@@ -25,6 +25,6 @@ def readWriteJSON():
 
 
 # initialization
-# i = sys.argv.index('serverlogging:app')
-# prefix = sys.argv[i+1]
+i = sys.argv.index('serverlogging:app')
+prefix = sys.argv[i+1]
 # app.run(host= '0.0.0.0', port = 8080)
