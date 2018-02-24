@@ -7,10 +7,10 @@ LOG_PATH = 'logs/Raw.txt'
 
 @app.route('/', methods=['POST'])
 def readWriteJSON():
-	logging.basicConfig()
 	del app.logger.handlers[:]
-	app.logger.addHandler(logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2))
+	timed_handler = logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2)
 	app.logger.setLevel(logging.INFO)
+	app.logger.addHandler(timed_handler)
 	result = request.get_json()
 	app.logger.info(repr(result))
 	####CHECK VALID JSON
