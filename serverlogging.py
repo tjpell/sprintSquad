@@ -1,11 +1,10 @@
 from flask import Flask, request
 import logging, logging.handlers
 
-logging.basicConfig()
-
 app = Flask(__name__)
 
 LOG_PATH = 'logs/Raw.txt'
+logging.basicConfig()
 
 @app.route('/', methods=['POST'])
 def readWriteJSON():
