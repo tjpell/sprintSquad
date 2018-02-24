@@ -4,7 +4,7 @@ import logging, logging.handlers
 app = Flask(__name__)
 
 LOG_PATH = 'logs/Raw.txt'
-logging.basicConfig()
+#logging.basicConfig()
 
 @app.route('/', methods=['POST'])
 def readWriteJSON():
