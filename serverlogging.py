@@ -21,6 +21,6 @@ def readWriteJSON():
 	my_logger.info(repr(json_blob))
 	####CHECK VALID JSON
 	write_JSON_if_valid(json_blob, '/srv/runme/{}/proc.txt'.format(prefix))
-	return repr(result)
+	return repr(json_blob)
 
 app.run(host= '0.0.0.0', port = 8080)
