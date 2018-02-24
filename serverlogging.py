@@ -4,10 +4,10 @@ import logging, logging.handlers
 app = Flask(__name__)
 
 LOG_PATH = 'logs/Raw.txt'
-#logging.basicConfig()
 
 @app.route('/', methods=['POST'])
 def readWriteJSON():
+	logging.basicConfig()
 	del app.logger.handlers[:]
 	app.logger.addHandler(logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2))
 	app.logger.setLevel(logging.INFO)
@@ -20,5 +20,4 @@ def readWriteJSON():
 			 fo.write(repr(result))
 	return repr(result)
 
-# app.run(host= '0.0.0.0', port = 8080)
-app.run(port = 8080)
+app.run(host= '0.0.0.0', port = 8080)
