@@ -14,9 +14,9 @@ def readWriteJSON():
 	prefix = 'prefix'
 	outpath = '/srv/runme/'
 	os.chdir(os.path.expanduser(os.getcwd())) #move to home directory
-    os.system('cd ..') #move one directory up
+	os.system('cd ..') #move one directory up
 	if not os.path.exists(outpath):
-        os.mkdir(outpath, 0777)
+		os.mkdir(outpath, 0777)
 	log_path = outpath + prefix + '/Raw.txt'
 	my_logger = logging.getLogger('MyLogger')
 	my_logger.setLevel(logging.DEBUG)
