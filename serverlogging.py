@@ -12,7 +12,7 @@ def readWriteJSON():
 	timed_handler.setLevel(logging.DEBUG)
 	app.logger.addHandler(timed_handler)
 	result = request.get_json()
-	app.logger.info(repr(result))
+	app.logger.warn(repr(result))
 	####CHECK VALID JSON
 	valid_json = True
 	if valid_json:
