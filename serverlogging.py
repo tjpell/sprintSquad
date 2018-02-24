@@ -1,7 +1,7 @@
 from flask import Flask, request
 import logging, logging.handlers
 
-logging.basicConfig()
+# logging.basicConfig()
 
 app = Flask(__name__)
 
