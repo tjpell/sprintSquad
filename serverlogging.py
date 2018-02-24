@@ -1,6 +1,6 @@
 # Launch with
-#
 # gunicorn -D --threads 4 -b 0.0.0.0:8080 --access-logfile server.log --timeout 60 serverlogging:app prefix
+import sys
 from flask import Flask, request
 import logging, logging.handlers
 from procData2 import write_JSON_if_valid
