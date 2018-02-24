@@ -61,7 +61,8 @@ def main():
     """
     Put your deploy command here!
     """
-    key_path = '/Users/taylorjames/keys_2_the_city/sprintSquad.pem'
+    # key_path = '/Users/taylorjames/keys_2_the_city/sprintSquad.pem'
+    key_path = '/Users/kaya/licenses/sprintSquad.pem'
     server_address = 'ec2-34-217-50-169.us-west-2.compute.amazonaws.com'
     prefix = 'prefix'
 
