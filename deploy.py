@@ -48,7 +48,7 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
 
     print "Launching server at " + server_address
     ssh.exec_command('gunicorn -D --threads 4 -b 0.0.0.0:8080 --access-logfile \
-                        server.log --timeout 360 server:app prefix')
+                        server.log --timeout 360 server:app {}'.format(prefix))
 
     # ssh.exec_command('python sprintSquad/procData.py ' + prefix)
     ssh.close()
