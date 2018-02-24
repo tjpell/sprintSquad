@@ -9,7 +9,7 @@ LOG_PATH = 'logs/Raw.txt'
 def readWriteJSON():
 	del app.logger.handlers[:]
 	timed_handler = logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2)
-	timed_handler.setLevel(logging.INFO)
+	timed_handler.setLevel(logging.DEBUG)
 	app.logger.addHandler(timed_handler)
 	result = request.get_json()
 	app.logger.info(repr(result))
