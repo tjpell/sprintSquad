@@ -13,8 +13,7 @@ def readWriteJSON():
 	my_logger.setLevel(logging.DEBUG)
 
 	# Add the log message handler to the logger
-	handler = logging.handlers.TimedRotatingFileHandler(log_path+
-	              LOG_FILENAME, when='m', interval = 2)
+	handler = logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2)
 
 	my_logger.addHandler(handler)
 	# del app.logger.handlers[:]
