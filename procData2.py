@@ -28,10 +28,6 @@ def write_JSON_if_valid(json_blob, outpath):
     input: JSON blob
     output: path of outfile
     """
-    os.chdir(os.path.expanduser(path)) #move to home directory
-    os.system('cd ../srv/runme') #move to output directory
-    if not os.path.exists(os.path.dirname(outpath)):
-        os.mkdir(os.path.dirname(outpath))
     if 'name' in json_blob and 'prop' in json_blob and 'age' in json_blob['prop']:
         with open(outpath, 'a') as of:
             of.write(json_blob['name'] + '\t' + str(json_blob['prop']['age']) + '\n')
