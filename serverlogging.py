@@ -1,5 +1,5 @@
 # Launch with
-# gunicorn -D --threads 4 -b 0.0.0.0:8080 --access-logfile server.log --timeout 60 serverlogging:app prefix
+# gunicorn -D --threads 4 -b 0.0.0.0:8080 --log-level=debug --access-logfile serveraccess.log --error-logfile servererror.log --timeout 360 serverlogging:app prefix
 import sys
 import os
 from flask import Flask, request
@@ -10,8 +10,7 @@ from procData2 import write_JSON_if_valid
 app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
-def readWriteJSON(prefix):
-# def readWriteJSON():
+def readWriteJSON():
 	# prefix = 'prefix'
 	outpath = '/srv/runme/' + prefix
 	os.chdir(os.path.expanduser(os.getcwd())) #move to home directory
