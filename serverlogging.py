@@ -1,4 +1,4 @@
-from flask import Flask, request,l
+from flask import Flask, request
 import logging, logging.handlers
 
 # logging.basicConfig()
@@ -9,12 +9,21 @@ LOG_PATH = 'logs/Raw.txt'
 
 @app.route('/', methods=['POST'])
 def readWriteJSON():
-	del app.logger.handlers[:]
-	timed_handler = logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2)
-	timed_handler.setLevel(logging.DEBUG)
-	app.logger.addHandler(timed_handler)
+	my_logger = logging.getLogger('MyLogger')
+	my_logger.setLevel(logging.DEBUG)
+
+	# Add the log message handler to the logger
+	handler = logging.handlers.TimedRotatingFileHandler(log_path+
+	              LOG_FILENAME, when='m', interval = 2)
+
+	my_logger.addHandler(handler)
+	# del app.logger.handlers[:]
+	# timed_handler = logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2)
+	# timed_handler.setLevel(logging.DEBUG)
+	# app.logger.addHandler(timed_handler)
 	result = request.get_json()
-	app.logger.warn(repr(result))
+	my_logger.info(repr(result))
+	# app.logger.warn(repr(result))
 	####CHECK VALID JSON
 	valid_json = True
 	if valid_json:
