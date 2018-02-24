@@ -19,8 +19,9 @@ def readWriteJSON():
 	if not os.path.exists(outpath):
 		os.mkdir(outpath, 0777)
 	log_path = outpath + '/Raw.txt'
-	my_logger = logging.getLogger('MyLogger')
+	my_logger = logging.getLogger('serverlogging')
 	my_logger.setLevel(logging.DEBUG)
+	my_logger.handlers = []
 	handler = logging.handlers.TimedRotatingFileHandler(log_path, when='m', interval = 2)
 	my_logger.addHandler(handler)
 	my_logger.info(request.data.strip()) ##logs HTTP POST with hard returns removed
