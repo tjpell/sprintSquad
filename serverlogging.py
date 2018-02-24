@@ -1,11 +1,9 @@
-from flask import Flask, request,logging
+from flask import Flask, request,l
 import logging, logging.handlers
 
 # logging.basicConfig()
 
 app = Flask(__name__)
-
-flask.logger.create_logger() 
 
 LOG_PATH = 'logs/Raw.txt'
 
