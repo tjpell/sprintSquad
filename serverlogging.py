@@ -9,22 +9,21 @@ from procData2 import write_JSON_if_valid
 app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
-def readWriteJSON(prefix):
-# def readWriteJSON():
-# 	prefix = 'prefix'
+# def readWriteJSON(prefix):
+def readWriteJSON():
+	prefix = 'prefix'
 	log_path = '/srv/runme/{}/Raw.txt'.format(prefix)
 	my_logger = logging.getLogger('MyLogger')
 	my_logger.setLevel(logging.DEBUG)
 	handler = logging.handlers.TimedRotatingFileHandler(log_path, when='m', interval = 2)
 	my_logger.addHandler(handler)
-	json_blob = request.get_json()
-	my_logger.info(repr(json_blob))
-	####CHECK VALID JSON
-	write_JSON_if_valid(json_blob, '/srv/runme/{}/proc.txt'.format(prefix))
+	my_logger.info(request.strip()) ##logs HTTP POST with hard returns removed
+	json_blob = request.get_json(silent=True) #won't even load blobs that aren't JSON format
+	write_JSON_if_valid(json_blob, '/srv/runme/{}/proc.txt'.format(prefix)) #writes processed JSON
 	return repr(json_blob)
 
-
 # initialization
-i = sys.argv.index('serverlogging:app')
-prefix = sys.argv[i+1]
-# app.run(host= '0.0.0.0', port = 8080)
+# i = sys.argv.index('serverlogging:app')
+# prefix = sys.argv[i+1]
+
+app.run(host= '0.0.0.0', port = 8080)
