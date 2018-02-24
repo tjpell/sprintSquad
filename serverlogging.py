@@ -1,33 +1,24 @@
+# Launch with
+#
+# gunicorn -D --threads 4 -b 0.0.0.0:5000 --access-logfile serverlogging.log --timeout 60 serverlogging:app prefix
 from flask import Flask, request
 import logging, logging.handlers
+from procData2 import write_JSON_if_valid
 
-# logging.basicConfig()
 
 app = Flask(__name__)
 
-LOG_PATH = 'logs/Raw.txt'
-
 @app.route('/', methods=['POST'])
-def readWriteJSON():
+def readWriteJSON(prefix):
+	log_path = '/srv/runme/{}/Raw.txt'.format(prefix)
 	my_logger = logging.getLogger('MyLogger')
 	my_logger.setLevel(logging.DEBUG)
-
-	# Add the log message handler to the logger
-	handler = logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2)
-
+	handler = logging.handlers.TimedRotatingFileHandler(log_path, when='m', interval = 2)
 	my_logger.addHandler(handler)
-	# del app.logger.handlers[:]
-	# timed_handler = logging.handlers.TimedRotatingFileHandler(LOG_PATH, when='m', interval = 2)
-	# timed_handler.setLevel(logging.DEBUG)
-	# app.logger.addHandler(timed_handler)
-	result = request.get_json()
+	json_blob = request.get_json()
 	my_logger.info(repr(result))
-	# app.logger.warn(repr(result))
 	####CHECK VALID JSON
-	valid_json = True
-	if valid_json:
-		with open("proc.txt","a") as fo:
-			 fo.write(repr(result))
+	write_JSON_if_valid(json_blob, '/srv/runme/{}/proc.txt'.format(prefix))
 	return repr(result)
 
-app.run(host= '0.0.0.0', port = 8080)
+# app.run(host= '0.0.0.0', port = 8080)
