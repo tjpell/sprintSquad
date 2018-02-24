@@ -23,7 +23,7 @@ def readWriteJSON():
 	my_logger.setLevel(logging.DEBUG)
 	handler = logging.handlers.TimedRotatingFileHandler(log_path, when='m', interval = 2)
 	my_logger.addHandler(handler)
-	my_logger.info(request.strip()) ##logs HTTP POST with hard returns removed
+	my_logger.info(request.data.strip()) ##logs HTTP POST with hard returns removed
 	json_blob = request.get_json(silent=True) #won't even load blobs that aren't JSON format
 	write_JSON_if_valid(json_blob, outpath + '/proc.txt') #writes processed JSON
 	return repr(json_blob)
