@@ -50,8 +50,8 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     # ssh.exec_command('export FLASK_APP=serverlogging.py')
     # ssh.exec_command('flask run')
     print "Launching server at " + server_address + ':8080'
-    ssh.exec_command('gunicorn -D --threads 4 -b {}:8080 --access-logfile \
-                         server.log --timeout 360 serverlogging:app {}'.format(server_address,prefix))
+    ssh.exec_command('gunicorn -D --threads 4 -b 0.0.0.0:8080 --access-logfile \
+                         server.log --timeout 360 serverlogging:app {}'.format(prefix))
 
     # ssh.exec_command('python sprintSquad/procData.py ' + prefix)
     ssh.close()
