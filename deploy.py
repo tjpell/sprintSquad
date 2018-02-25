@@ -3,8 +3,6 @@
 import paramiko
 import time
 
-import serverlogging 
-
 def connect_and_pull(path_to_ssh_key_private_key, server_address):
     """
     :param path_to_ssh_key_private_key: path to ssh private key
@@ -46,14 +44,17 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     """
 
     ssh = connect_and_pull(path_to_ssh_key_private_key, server_address)
-    #write_cron(ssh, prefix)
+    write_cron(ssh, prefix)
     # ssh.exec_command('export FLASK_APP=serverlogging.py')
     # ssh.exec_command('flask run')
     print "Launching server at " + server_address + ':8080'
     ssh.exec_command('gunicorn -D --threads 4 -b 0.0.0.0:8080 --log-level=debug --access-logfile \
-        serveraccess.log --error-logfile servererror.log --timeout 360 serverlogging:app {}'.format(prefix))
+        serveraccess.log --error-logfile servererror.log --timeout 360 serverlogging:app(prefix={})'.format(prefix))
 
     # ssh.exec_command('python sprintSquad/procData.py ' + prefix)
+
+    # gunicorn -D --threads 4 -b 0.0.0.0:8080 --log-level=debug --access-logfile serveraccess.log --error-logfile servererror.log --timeout 360 serverlogging:app prefix
+
     ssh.close()
 
 
@@ -61,8 +62,8 @@ def main():
     """
     Put your deploy command here!
     """
-    # key_path = '/Users/taylorjames/keys_2_the_city/sprintSquad.pem'
-    key_path = '/Users/kaya/licenses/sprintSquad.pem'
+    key_path = '/Users/taylorjames/keys_2_the_city/sprintSquad.pem'
+    # key_path = '/Users/kaya/licenses/sprintSquad.pem'
     server_address = 'ec2-34-217-50-169.us-west-2.compute.amazonaws.com'
     prefix = 'prefix'
 
