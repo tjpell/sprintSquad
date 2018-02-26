@@ -30,17 +30,15 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     """
 
     ssh = connect_and_pull(path_to_ssh_key_private_key, server_address)
-    # write_cron(ssh, prefix)
     ssh.exec_command('export FLASK_APP=serverlogging.py')
     stdin, stdout, stderr = ssh.exec_command('flask run')  # .format(prefix))
-    # print "Launching server at " + server_address + 'p:8080'
 
-    ssh.exec_command('python sprintSquad/serverlogging.py {}'.format(prefix))
+    ssh.exec_command("python sprintSquad/serverlogging.py '{}'".format(prefix))  # launch the server
 
     print "Firing up JSON receiver!"
     # stdin, stdout, stderr = ssh.exec_command("gunicorn -D --threads 4 -b 0.0.0.0:8080 --log-level=debug \
     #                                             --access-logfile serveraccess.log --error-logfile servererror.log \
-    #                                             --timeout 360 'serverlogging:app(prefix='{}')'".format(prefix))
+    #                                             --timeout 360 'serverlogging:app '{}')'".format(prefix))
 
     # ssh.exec_command('python sprintSquad/procData.py ' + prefix)
     # print ('stdin: {} \n\n stdout: {} \n\n stderr: {}'.format(stdin, stdout, stderr))
@@ -52,7 +50,7 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
 
 def main():
     """
-    Put your deploy command here!
+    Put your deploy command here
     """
     key_path = '/Users/taylorjames/keys_2_the_city/sprintSquad.pem'
     # key_path = '/Users/kaya/licenses/sprintSquad.pem'
