@@ -9,8 +9,9 @@ from procData2 import write_JSON_if_valid
 app = Flask(__name__)
 
 
-@app.route('/', methods=['POST'])
-def readWriteJSON(prefix):
+@app.route('/', methods=['GET', 'POST'])
+def readWriteJSON():
+    prefix = app.config.get('prefix')
     outpath = '/srv/runme/' + prefix
     os.chdir(os.path.expanduser(os.getcwd()))  # move to home directory
     os.system('cd ..')  # move one directory up
@@ -36,4 +37,5 @@ def readWriteJSON(prefix):
 
 if __name__ == "__main__":
     #prefix = 'prefix'
+    app.config['prefix'] = sys.argv[1]
     app.run(host='0.0.0.0', port=8080)
