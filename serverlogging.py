@@ -37,6 +37,8 @@ def readWriteJSON():
 # i = sys.argv.index('run')
 
 if __name__ == "__main__":
-    # prefix = sys.argv[1]
-    app.config['prefix'] = sys.argv[1]
+    i = sys.argv.index('sprintSquad/serverlogging.py')
+    prefix = sys.argv[i + 1]
+
+    app.config['prefix'] = prefix
     app.run(host='0.0.0.0', port=8080)
