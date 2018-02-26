@@ -34,6 +34,6 @@ def readWriteJSON():
 # i = sys.argv.index('run')
 # prefix = sys.argv[i + 1]
 
-if __name__=="__main__":
+if __name__ == "__main__":
     prefix = 'prefix'
-    app.run(host='0.0.0.0', port = 8080)
+    app.run(host='0.0.0.0', port=8080)
