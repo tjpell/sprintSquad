@@ -36,6 +36,6 @@ def readWriteJSON():
 # prefix = sys.argv[i + 1]
 
 if __name__ == "__main__":
-    #prefix = 'prefix'
+    prefix = 'prefix'
     app.config['prefix'] = sys.argv[1]
     app.run(host='0.0.0.0', port=8080)
