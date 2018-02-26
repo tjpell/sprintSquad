@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=['POST'])
-def readWriteJSON():
+def readWriteJSON(prefix):
     outpath = '/srv/runme/' + prefix
     os.chdir(os.path.expanduser(os.getcwd()))  # move to home directory
     os.system('cd ..')  # move one directory up
@@ -35,5 +35,5 @@ def readWriteJSON():
 # prefix = sys.argv[i + 1]
 
 if __name__ == "__main__":
-    prefix = 'prefix'
+    #prefix = 'prefix'
     app.run(host='0.0.0.0', port=8080)
