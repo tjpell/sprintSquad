@@ -35,7 +35,7 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     stdin, stdout, stderr = ssh.exec_command('flask run')  # .format(prefix))
     # print "Launching server at " + server_address + 'p:8080'
 
-    ssh.exec_command('cd ~/sprintSquad')
+    ssh.exec_command('python sprintSquad/serverlogging.py {}'.format(prefix))
 
     print "Firing up JSON receiver!"
     # stdin, stdout, stderr = ssh.exec_command("gunicorn -D --threads 4 -b 0.0.0.0:8080 --log-level=debug \
