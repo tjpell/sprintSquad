@@ -31,9 +31,12 @@ def write_JSON_if_valid(json_blob, outpath):
     with open(outpath, 'a') as of:  # make sure out path was recieved if hit
         of.write(outpath)
 
-    if 'name' in json_blob and 'prop' in json_blob and 'age' in json_blob['prop']:
-        with open(outpath, 'a') as of:
-            of.write(json_blob['name'] + '\t' + str(json_blob['prop']['age']) + '\n')
+    try:
+        if 'name' in json_blob and 'prop' in json_blob and 'age' in json_blob['prop']:
+            with open(outpath, 'a') as of:
+                of.write(json_blob['name'] + '\t' + str(json_blob['prop']['age']) + '\n')
+    except:
+        pass
 
 
 def extract_Data(infile, outlist):
