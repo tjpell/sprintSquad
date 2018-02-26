@@ -28,6 +28,9 @@ def write_JSON_if_valid(json_blob, outpath):
     input: JSON blob
     output: path of outfile
     """
+    with open(outpath, 'a') as of:  # make sure out path was recieved if hit
+        of.write(outpath)
+
     if 'name' in json_blob and 'prop' in json_blob and 'age' in json_blob['prop']:
         with open(outpath, 'a') as of:
             of.write(json_blob['name'] + '\t' + str(json_blob['prop']['age']) + '\n')
@@ -71,6 +74,7 @@ def main():
 
     with open(outfile, 'w') as f:
         f.write('\n'.join(output)+'\n')
+
 
 
 if __name__ == "__main__":
