@@ -32,8 +32,8 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     ssh = connect_and_pull(path_to_ssh_key_private_key, server_address)
     # write_cron(ssh, prefix)
     ssh.exec_command('export FLASK_APP=serverlogging.py')
-    stdin, stdout, stderr = ssh.exec_command('flask run prefix')  # .format(prefix))
-    print "Launching server at " + server_address + ':8080'
+    stdin, stdout, stderr = ssh.exec_command('flask run')  # .format(prefix))
+    # print "Launching server at " + server_address + ':8080'
 
     ssh.exec_command('cd ~/sprintSquad')
 
