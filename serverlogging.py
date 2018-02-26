@@ -35,4 +35,4 @@ def readWriteJSON():
 # prefix = sys.argv[i + 1]
 
 prefix = 'prefix'
-app.run(host=se'0.0.0.0', port = 8080)
+app.run(host='0.0.0.0', port = 8080)
