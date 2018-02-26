@@ -20,17 +20,17 @@ def connect_and_pull(path_to_ssh_key_private_key, server_address):
     return ssh  # we want to use the same connection later
 
 
-def write_cron(ssh, prefix):
-    """
-    Writes a cron file to schedule processing of Raw.txt
-    :param ssh: the connection initialized in connect_and_pull
-    :param prefix: subdir inside /srv/runme/ to work in
-    :return: None
-    """
-    print "Lets crontab some shit"
-    ssh.exec_command('crontab - r')  # write out current crontab. we should remove this "mycron" part
-    ssh.exec_command('(crontab - l 2>/dev/null; echo "*/2 * * * * python sprintSquad/procData.py {}") | crontab - '.format(prefix))  # every 5 mins
-    print "Script fully executed ... exciting!"
+# def write_cron(ssh, prefix):
+#     """
+#     Writes a cron file to schedule processing of Raw.txt
+#     :param ssh: the connection initialized in connect_and_pull
+#     :param prefix: subdir inside /srv/runme/ to work in
+#     :return: None
+#     """
+#     print "Lets crontab some shit"
+#     ssh.exec_command('crontab - r')  # write out current crontab. we should remove this "mycron" part
+#     ssh.exec_command('(crontab - l 2>/dev/null; echo "*/2 * * * * python sprintSquad/procData.py {}") | crontab - '.format(prefix))  # every 5 mins
+#     print "Script fully executed ... exciting!"
 
 
 def deploy(path_to_ssh_key_private_key, server_address, prefix):
@@ -47,13 +47,14 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     # write_cron(ssh, prefix)
     # ssh.exec_command('export FLASK_APP=serverlogging.py')
     # ssh.exec_command('flask run')
-    print "Launching server at " + server_address + ':8080'
-    ssh.exec_command('gunicorn -D --threads 4 -b 0.0.0.0:8080 --log-level=debug --access-logfile \
+    # print "Launching server at " + server_address + ':8080'
+    stdin, stdout, stderr = ssh.exec_command('gunicorn -D --threads 4 -b 0.0.0.0:8080 --log-level=debug --access-logfile \
         serveraccess.log --error-logfile servererror.log --timeout 360 serverlogging:app(prefix={})'.format(prefix))
 
     # ssh.exec_command('python sprintSquad/procData.py ' + prefix)
+    # print ('stdin: {} \n\n stdout: {} \n\n stderr: {}'.format(stdin, stdout, stderr))
 
-    # gunicorn -D --threads 4 -b 0.0.0.0:8080 --log-level=debug --access-logfile serveraccess.log --error-logfile servererror.log --timeout 360 serverlogging:app prefix
+    print stdout.channel.recv_exit_status()
 
     ssh.close()
 
@@ -68,6 +69,8 @@ def main():
     prefix = 'prefix'
 
     deploy(key_path, server_address, prefix)
+
+
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=['POST'])
-def readWriteJSON(prefix, *args, **kwargs):
+def readWriteJSON(prefix):
 
     outpath = '/srv/runme/' + prefix
     os.chdir(os.path.expanduser(os.getcwd()))  # move to home directory
@@ -18,7 +18,7 @@ def readWriteJSON(prefix, *args, **kwargs):
     if not os.path.exists(outpath):
         os.mkdir(outpath, 0777)
     log_path = outpath + '/Raw.txt'
-    
+
     my_logger = logging.getLogger('serverlogging')
     my_logger.setLevel(logging.DEBUG)
     handler = logging.handlers.TimedRotatingFileHandler(log_path, when='m', interval=2)
