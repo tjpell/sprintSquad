@@ -20,7 +20,7 @@ def readWriteJSON():
         os.mkdir(outpath, 0777)
 
     log_path = outpath + '/Raw.txt'  # initialize logging process
-    my_logger = logging.getLogger('serverlogging')
+    my_logger = logging.getLoggger('serverlogging')
     my_logger.setLevel(logging.DEBUG)
     handler = logging.handlers.TimedRotatingFileHandler(log_path, when='m', interval=2)
     my_logger.handlers = []

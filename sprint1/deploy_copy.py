@@ -3,6 +3,18 @@
 import paramiko
 import time
 
+# def write_cron(ssh, prefix):
+#     """
+#     Writes a cron file to schedule processing of Raw.txt
+#     :param ssh: the connection initialized in connect_and_pull
+#     :param prefix: subdir inside /srv/runme/ to work in
+#     :return: None
+#     """
+#     print "Lets crontab some shit"
+#     ssh.exec_command('crontab - r')  # write out current crontab. we should remove this "mycron" part
+#     ssh.exec_command('(crontab - l 2>/dev/null; echo "*/2 * * * * python sprintSquad/procData.py {}") | crontab - '.format(prefix))  # every 5 mins
+#     print "Script fully executed ... exciting!"
+
 def deploy(path_to_ssh_key_private_key, server_address, prefix):
     """
     :param path_to_ssh_key_private_key: where the key file lives on local machine
