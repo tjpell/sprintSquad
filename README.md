@@ -19,6 +19,7 @@ procData.py :
 2) main(): If line in file is porperly formed JSON blob, extract name and age and write to output file
 3) Contains methods to do the above, imported by serverlogging.py
 
-Directories:
+Directories :
 sprint1 : Launches a scheduled JSON ingester, less complex version of the above processes
-templated: basic HTML for a front end to the server's address if visited on chrome
+
+templates: basic HTML for a front end to the server's address if visited on chrome
