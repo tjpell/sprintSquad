@@ -1,7 +1,21 @@
-import glob
 import json
 import os
 import sys
+
+def write_JSON_if_valid(json_blob, outpath):
+    """
+    when given a JSON, determines whether the blob is of the appropriate format
+    given in the instructions. If so, the name and age are appended to the output file.
+
+    input: JSON blob
+    output: path of outfile
+    """
+    try:
+        if 'name' in json_blob and 'prop' in json_blob and 'age' in json_blob['prop']:
+            with open(outpath, 'a') as of:
+                of.write(json_blob['name'] + '\t' + str(json_blob['prop']['age']) + '\n')
+    except Exception as e:
+        print e
 
 def process_lines(json_lines, outlist):
     """
@@ -59,6 +73,7 @@ def main():
 
     with open(outfile, 'w') as f:
         f.write('\n'.join(output)+'\n')
+
 
 
 if __name__ == "__main__":

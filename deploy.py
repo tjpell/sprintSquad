@@ -4,6 +4,8 @@ import paramiko
 
 def connect_and_pull(path_to_ssh_key_private_key, server_address):
     """
+    Connect to the provided ec2 instance, clones team github repo
+
     :param path_to_ssh_key_private_key: path to ssh private key
     :param server_address: location of ec2 instance
     :return: ssh connection object
@@ -31,7 +33,7 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
 
     ssh = connect_and_pull(path_to_ssh_key_private_key, server_address)
     ssh.exec_command('export FLASK_APP=serverlogging.py')
-    stdin, stdout, stderr = ssh.exec_command('flask run')  # .format(prefix))
+    ssh.exec_command('flask run')
 
     ssh.exec_command("python sprintSquad/serverlogging.py '{}'".format(prefix))  # launch the server
 
@@ -40,11 +42,6 @@ def deploy(path_to_ssh_key_private_key, server_address, prefix):
     #                                             --access-logfile serveraccess.log --error-logfile servererror.log \
     #                                             --timeout 360 'serverlogging:app '{}')'".format(prefix))
 
-    # ssh.exec_command('python sprintSquad/procData.py ' + prefix)
-    # print ('stdin: {} \n\n stdout: {} \n\n stderr: {}'.format(stdin, stdout, stderr))
-
-    print stdout.channel.recv_exit_status()
-
     ssh.close()
 
 
@@ -52,13 +49,8 @@ def main():
     """
     Put your deploy command here
     """
-    key_path = '/Users/taylorjames/keys_2_the_city/sprintSquad.pem'
-    # key_path = '/Users/kaya/licenses/sprintSquad.pem'
-    server_address = 'ec2-34-217-50-169.us-west-2.compute.amazonaws.com'
-    prefix = 'prefix'
 
-    deploy(key_path, server_address, prefix)
-
+    # deploy(key_path, server_address, prefix)
 
 
 

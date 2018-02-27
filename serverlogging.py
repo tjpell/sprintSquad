@@ -4,23 +4,22 @@ import sys
 import os
 from flask import Flask, request
 import logging, logging.handlers
-from procData2 import write_JSON_if_valid
+from procData import write_JSON_if_valid
 
 app = Flask(__name__)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def readWriteJSON():
-    prefix = app.config.get('prefix')
-
-    # prefix = 'prefix'
+    prefix = app.config.get('prefix')  # pull prefix out of provided configuration (see main method)
     outpath = '/srv/runme/' + prefix
+
     os.chdir(os.path.expanduser(os.getcwd()))  # move to home directory
-    os.system('cd ..')  # move one directory up
+    os.system('cd ..')  # move one directory up to
     if not os.path.exists(outpath):
         os.mkdir(outpath, 0777)
-    log_path = outpath + '/Raw.txt'
 
+    log_path = outpath + '/Raw.txt'  # initialize logging process
     my_logger = logging.getLogger('serverlogging')
     my_logger.setLevel(logging.DEBUG)
     handler = logging.handlers.TimedRotatingFileHandler(log_path, when='m', interval=2)
@@ -33,12 +32,9 @@ def readWriteJSON():
     return repr(json_blob)
 
 
-# initialization
-# i = sys.argv.index('run')
-
 if __name__ == "__main__":
     i = sys.argv.index('sprintSquad/serverlogging.py')
-    prefix = sys.argv[i + 1]
+    prefix = sys.argv[i + 1]  # collect the prefix
 
-    app.config['prefix'] = prefix
+    app.config['prefix'] = prefix  # pass prefix into app
     app.run(host='0.0.0.0', port=8080)  # may need to remove this if using gunicorn
