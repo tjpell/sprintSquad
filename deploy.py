@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+# team "comfortable walking pace"
+# Taylor Pellerin
+# Kaya Tollas
+# Sara Mahar
+# Ford Higgins
+# John Rumple
+
 import paramiko
 
 def connect_and_pull(path_to_ssh_key_private_key, server_address):
